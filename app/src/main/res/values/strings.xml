@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MarvelDex</string>
+    <string name="empty_label">No results!</string>
+    <string name="empty_description">No description available</string>
+</resources>
