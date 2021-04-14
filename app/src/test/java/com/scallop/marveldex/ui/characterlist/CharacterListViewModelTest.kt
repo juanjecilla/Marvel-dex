@@ -6,7 +6,7 @@ import com.scallop.marveldex.CoroutineTestRule
 import com.scallop.marveldex.fakes.FakeGetCharactersUseCase
 import com.scallop.marveldex.mappers.CharacterMapper
 import com.scallop.marveldex.utils.Status
-import com.scallop.randomweather.utils.TestUtils
+import com.scallop.marveldex.TestUtils
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Rule

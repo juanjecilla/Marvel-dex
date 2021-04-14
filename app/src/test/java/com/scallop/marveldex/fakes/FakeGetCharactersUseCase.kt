@@ -5,7 +5,7 @@ import com.scallop.marveldex.domain.entities.ResultWrapperEntity
 import com.scallop.marveldex.domain.usecases.GetCharactersBaseUseCase
 import com.scallop.marveldex.domain.usecases.GetCharactersUseCase
 import com.scallop.marveldex.utils.Status
-import com.scallop.randomweather.utils.TestUtils
+import com.scallop.marveldex.TestUtils
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 

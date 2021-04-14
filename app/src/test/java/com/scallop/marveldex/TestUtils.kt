@@ -1,4 +1,4 @@
-package com.scallop.randomweather.utils
+package com.scallop.marveldex
 
 import com.scallop.marveldex.domain.entities.CollectionEntity
 import com.scallop.marveldex.domain.entities.MarvelCharacterEntity
