@@ -5,43 +5,40 @@ import com.scallop.marveldex.domain.entities.*
 
 class DataEntityMapper {
 
+    fun mapResults(data: ResultWrapperData.Success<List<MarvelCharacterData>>) =
+        ResultWrapperEntity.Success(
+            mapCharacters(data.value)
+        )
+
+    fun mapResult(data: ResultWrapperData.Success<MarvelCharacterData>) =
+        ResultWrapperEntity.Success(
+            mapCharacter(data.value)
+        )
+
+    fun mapException(data: ResultWrapperData.GenericError) = ResultWrapperEntity.GenericError(
+        data.code, data.exception
+    )
+
+
     fun mapCharacters(results: List<MarvelCharacterData>) = results.map { mapCharacter(it) }
 
     fun mapCharacter(data: MarvelCharacterData) = MarvelCharacterEntity(
         thumbnail = mapThumbnail(data.thumbnail),
         urls = mapUrls(data.urls),
-//        stories = mapStories(data.stories),
-//        series = data.series,
-//        comics = data.comics,
+        stories = mapCollection(data.stories),
+        series = mapCollection(data.series),
+        comics = mapCollection(data.comics),
         name = data.name,
         description = data.description,
         modified = data.modified,
         id = data.id,
         resourceURI = data.resourceURI,
-        events = mapEvent(data.events),
+        events = mapCollection(data.events),
     )
 
     private fun mapThumbnail(data: ThumbnailData) = ThumbnailEntity(
         path = data.path,
         extension = data.extension,
-    )
-
-    private fun mapStories(data: List<StoryData>) = data.map { mapStory(it) }
-
-    private fun mapStory(data: StoryData) = StoryEntity(
-        collectionURI = data.collectionURI,
-        available = data.available,
-        returned = data.returned,
-        items = mapItems(data.items),
-    )
-
-    private fun mapEvents(data: List<EventsData>) = data.map { mapEvent(it) }
-
-    private fun mapEvent(data: EventsData) = EventsEntity(
-        collectionURI = data.collectionURI,
-        available = data.available,
-        returned = data.returned,
-        items = mapItems(data.items),
     )
 
     private fun mapItems(data: List<ResourceItemData>) = data.map { mapItem(it) }
@@ -56,5 +53,14 @@ class DataEntityMapper {
     private fun mapUrl(data: UrlsData) = UrlsEntity(
         type = data.type,
         url = data.url,
+    )
+
+    private fun mapCollections(data: List<CollectionData>) = data.map { mapCollection(it) }
+
+    private fun mapCollection(data: CollectionData) = CollectionEntity(
+        collectionURI = data.collectionURI,
+        available = data.available,
+        returned = data.returned,
+        items = mapItems(data.items),
     )
 }

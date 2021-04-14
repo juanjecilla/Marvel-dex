@@ -1,7 +1,6 @@
 package com.scallop.marveldex.domain.entities
 
-
-data class ComicsEntity(
+data class CollectionEntity(
     val collectionURI: String,
     val available: Int,
     val returned: Int,

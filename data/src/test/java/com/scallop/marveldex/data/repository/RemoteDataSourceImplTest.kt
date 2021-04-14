@@ -2,6 +2,8 @@ package com.scallop.marveldex.data.repository
 
 import com.google.common.truth.Truth
 import com.scallop.marveldex.data.BaseTest
+import com.scallop.marveldex.data.entitites.MarvelCharacterData
+import com.scallop.marveldex.data.entitites.ResultWrapperData
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
@@ -20,12 +22,15 @@ class RemoteDataSourceImplTest : BaseTest() {
     }
 
     @Test
-    fun `get weather by location with successful results`() {
+    fun `get characters with successful results`() {
         runBlocking {
             val results = mRemote.getCharacters(20, 0)
             results.collect {
                 Truth.assertThat(it).isNotNull()
-                Truth.assertThat(it).hasSize(20)
+                Truth.assertThat(it).isInstanceOf(ResultWrapperData.Success::class.java)
+                assert(it is ResultWrapperData.Success)
+                it as ResultWrapperData.Success
+                Truth.assertThat(it.value).hasSize(20)
             }
         }
     }

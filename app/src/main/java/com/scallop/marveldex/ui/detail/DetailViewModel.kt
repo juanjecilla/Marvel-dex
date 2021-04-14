@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.scallop.marveldex.domain.entities.MarvelCharacterEntity
+import com.scallop.marveldex.domain.entities.ResultWrapperEntity
 import com.scallop.marveldex.domain.usecases.GetCharacterBaseUseCase
 import com.scallop.marveldex.domain.usecases.GetCharacterUseCase
 import com.scallop.marveldex.mappers.CharacterMapper
@@ -36,7 +38,8 @@ class DetailViewModel(
             }
             results.map {
                 _data.value = DetailState.DetailLoading(false)
-                _data.value = DetailState.DetailSuccess(mMapper.mapCharacter(it))
+                _data.value =
+                    DetailState.DetailSuccess(mMapper.mapResult(it as ResultWrapperEntity.Success<MarvelCharacterEntity>).value)
             }.collect()
         }
     }

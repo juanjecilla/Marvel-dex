@@ -11,13 +11,13 @@ data class MarvelCharacterData(
     val urls: List<UrlsData>,
 
     @Json(name = "stories")
-    val stories: StoryData,
+    val stories: CollectionData,
 
     @Json(name = "series")
-    val series: SeriesData,
+    val series: CollectionData,
 
     @Json(name = "comics")
-    val comics: ComicsData,
+    val comics: CollectionData,
 
     @Json(name = "name")
     val name: String,
@@ -35,5 +35,5 @@ data class MarvelCharacterData(
     val resourceURI: String,
 
     @Json(name = "events")
-    val events: EventsData
+    val events: CollectionData
 )

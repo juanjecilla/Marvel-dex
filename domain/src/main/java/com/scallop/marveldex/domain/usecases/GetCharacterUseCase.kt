@@ -2,10 +2,11 @@ package com.scallop.marveldex.domain.usecases
 
 import com.scallop.marveldex.domain.common.BaseUseCase
 import com.scallop.marveldex.domain.entities.MarvelCharacterEntity
+import com.scallop.marveldex.domain.entities.ResultWrapperEntity
 import com.scallop.marveldex.domain.repositories.MarvelRepository
 import kotlinx.coroutines.flow.Flow
 
-typealias GetCharacterBaseUseCase = BaseUseCase<GetCharacterUseCase.Params, Flow<MarvelCharacterEntity>>
+typealias GetCharacterBaseUseCase = BaseUseCase<GetCharacterUseCase.Params, Flow<ResultWrapperEntity<MarvelCharacterEntity>>>
 
 class GetCharacterUseCase(
     private val mRepository: MarvelRepository

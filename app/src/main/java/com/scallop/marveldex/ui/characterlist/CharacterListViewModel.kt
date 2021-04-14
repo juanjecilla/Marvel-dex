@@ -1,9 +1,12 @@
 package com.scallop.marveldex.ui.characterlist
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.scallop.marveldex.domain.entities.MarvelCharacterEntity
+import com.scallop.marveldex.domain.entities.ResultWrapperEntity
 import com.scallop.marveldex.domain.usecases.GetCharactersBaseUseCase
 import com.scallop.marveldex.domain.usecases.GetCharactersUseCase
 import com.scallop.marveldex.entities.MarvelCharacter
@@ -37,10 +40,21 @@ class CharacterListViewModel(
                 mUseCase(GetCharactersUseCase.Params(20, page * 20))
             }
             results.map {
-                items.addAll(mMapper.mapCharacters(it))
-
                 _data.value = CharacterListState.CharacterListLoading(false)
-                _data.value = CharacterListState.CharacterListItems(items)
+
+                when (it) {
+                    is ResultWrapperEntity.Success<*> -> {
+                        items.addAll(mMapper.mapResults(it as ResultWrapperEntity.Success<List<MarvelCharacterEntity>>).value)
+                        _data.value = CharacterListState.CharacterListItems(items)
+                    }
+
+                    is ResultWrapperEntity.GenericError -> {
+                        _data.value = CharacterListState.CharacterListFailure(
+                            it.exception.toString()
+                        )
+                    }
+                    else -> throw IllegalArgumentException()
+                }
             }.collect()
         }
     }

@@ -1,6 +1,6 @@
 package com.scallop.randomweather.utils
 
-import com.scallop.marveldex.domain.entities.EventsEntity
+import com.scallop.marveldex.domain.entities.CollectionEntity
 import com.scallop.marveldex.domain.entities.MarvelCharacterEntity
 import com.scallop.marveldex.domain.entities.ThumbnailEntity
 
@@ -18,12 +18,14 @@ object TestUtils {
     private fun getCharacter(i: Int) = MarvelCharacterEntity(
         ThumbnailEntity("$i", "$i"),
         listOf(),
+        CollectionEntity("stories $i", i, i, listOf()),
+        CollectionEntity("series $i", i, i, listOf()),
+        CollectionEntity("comics $i", i, i, listOf()),
         "name $i",
         "description $i",
         "modified $i",
         i,
         "resourceURI $i",
-        EventsEntity("collection $i", i, i, listOf()),
-
-        )
+        CollectionEntity("events $i", i, i, listOf()),
+    )
 }
