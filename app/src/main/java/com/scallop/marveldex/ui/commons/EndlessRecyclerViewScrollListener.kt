@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 
 abstract class EndlessRecyclerViewScrollListener : RecyclerView.OnScrollListener {
 
-    private var visibleThreshold = 5
+    private var visibleThreshold = DEFAULT_VISIBLE_THRESHOLD
     private var startingPageIndex = 1
     private var currentPage = startingPageIndex
     private var previousTotalItemCount = 0
@@ -124,4 +124,8 @@ abstract class EndlessRecyclerViewScrollListener : RecyclerView.OnScrollListener
 
     // Defines the process for actually loading more data based on page
     abstract fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView)
+
+    companion object {
+        private const val DEFAULT_VISIBLE_THRESHOLD = 5
+    }
 }

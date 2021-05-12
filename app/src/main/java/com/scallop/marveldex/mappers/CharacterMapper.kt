@@ -51,14 +51,10 @@ class CharacterMapper {
         url = entity.url,
     )
 
-    private fun mapCollections(entities: List<CollectionEntity>) =
-        entities.map { mapCollection(it) }
-
     private fun mapCollection(entity: CollectionEntity) = Collection(
         collectionURI = entity.collectionURI,
         available = entity.available,
         returned = entity.returned,
         items = mapItems(entity.items),
     )
-
 }

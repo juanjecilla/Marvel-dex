@@ -39,7 +39,11 @@ class DetailViewModel(
             results.map {
                 _data.value = DetailState.DetailLoading(false)
                 _data.value =
-                    DetailState.DetailSuccess(mMapper.mapResult(it as ResultWrapperEntity.Success<MarvelCharacterEntity>).value)
+                    DetailState.DetailSuccess(
+                        mMapper.mapResult(
+                            it as ResultWrapperEntity.Success<MarvelCharacterEntity>
+                        ).value
+                    )
             }.collect()
         }
     }

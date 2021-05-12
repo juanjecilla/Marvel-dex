@@ -6,7 +6,9 @@ import com.scallop.marveldex.domain.entities.ResultWrapperEntity
 import com.scallop.marveldex.domain.repositories.MarvelRepository
 import kotlinx.coroutines.flow.Flow
 
-typealias GetCharactersBaseUseCase = BaseUseCase<GetCharactersUseCase.Params, Flow<ResultWrapperEntity<List<MarvelCharacterEntity>>>>
+typealias GetCharactersBaseUseCase =
+        BaseUseCase<GetCharactersUseCase.Params,
+                Flow<ResultWrapperEntity<List<MarvelCharacterEntity>>>>
 
 class GetCharactersUseCase(
     private val mRepository: MarvelRepository

@@ -78,7 +78,7 @@ class CharacterListFragment : Fragment(), OnItemClick<MarvelCharacter> {
                     is CharacterListState.CharacterListFailure -> {
                         Toast.makeText(context, it.failure, Toast.LENGTH_LONG).show()
                     }
-                    else -> throw IllegalArgumentException()
+                    else -> throw IllegalStateException(it.toString())
                 }
             }
         })

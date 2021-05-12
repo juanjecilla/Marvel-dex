@@ -19,9 +19,12 @@ class RepositoryImpl(
     ): Flow<ResultWrapperEntity<List<MarvelCharacterEntity>>> {
         return mRemote.getCharacters(limit, offset).map {
             when (it) {
-                is ResultWrapperData.Success<*> -> mDataEntityMapper.mapResults(it as ResultWrapperData.Success<List<MarvelCharacterData>>)
+                is ResultWrapperData.Success<*> ->
+                    mDataEntityMapper.mapResults(
+                        it as ResultWrapperData.Success<List<MarvelCharacterData>>
+                    )
                 is ResultWrapperData.GenericError -> mDataEntityMapper.mapException(it)
-                else -> throw IllegalArgumentException()
+                else -> throw IllegalStateException(it.toString())
             }
         }
     }
@@ -29,9 +32,12 @@ class RepositoryImpl(
     override suspend fun getCharacter(id: Int): Flow<ResultWrapperEntity<MarvelCharacterEntity>> {
         return mRemote.getCharacter(id).map {
             when (it) {
-                is ResultWrapperData.Success<*> -> mDataEntityMapper.mapResult(it as ResultWrapperData.Success<MarvelCharacterData>)
+                is ResultWrapperData.Success<*> ->
+                    mDataEntityMapper.mapResult(
+                        it as ResultWrapperData.Success<MarvelCharacterData>
+                    )
                 is ResultWrapperData.GenericError -> mDataEntityMapper.mapException(it)
-                else -> throw IllegalArgumentException()
+                else -> throw IllegalStateException(it.toString())
             }
         }
     }

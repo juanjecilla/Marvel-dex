@@ -52,7 +52,7 @@ class DetailFragment : Fragment() {
                     is DetailState.DetailFailure -> {
                         Toast.makeText(context, it.failure, Toast.LENGTH_LONG).show()
                     }
-                    else -> throw IllegalArgumentException()
+                    else -> throw IllegalStateException(it.toString())
                 }
             }
         })

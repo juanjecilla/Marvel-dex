@@ -11,6 +11,7 @@ import com.scallop.marveldex.domain.usecases.GetCharactersBaseUseCase
 import com.scallop.marveldex.domain.usecases.GetCharactersUseCase
 import com.scallop.marveldex.entities.MarvelCharacter
 import com.scallop.marveldex.mappers.CharacterMapper
+import com.scallop.marveldex.ui.commons.Properties
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -37,14 +38,16 @@ class CharacterListViewModel(
         _data.value = CharacterListState.CharacterListLoading(true)
         viewModelScope.launch {
             val results = withContext(mDispatcher) {
-                mUseCase(GetCharactersUseCase.Params(20, page * 20))
+                mUseCase(GetCharactersUseCase.Params(Properties.ITEMS_PER_PAGE, page * Properties.ITEMS_PER_PAGE))
             }
             results.map {
                 _data.value = CharacterListState.CharacterListLoading(false)
 
                 when (it) {
                     is ResultWrapperEntity.Success<*> -> {
-                        items.addAll(mMapper.mapResults(it as ResultWrapperEntity.Success<List<MarvelCharacterEntity>>).value)
+                        items.addAll(mMapper.mapResults(
+                            it as ResultWrapperEntity.Success<List<MarvelCharacterEntity>>)
+                            .value)
                         _data.value = CharacterListState.CharacterListItems(items)
                     }
 
@@ -53,7 +56,7 @@ class CharacterListViewModel(
                             it.exception.toString()
                         )
                     }
-                    else -> throw IllegalArgumentException()
+                    else -> throw IllegalStateException(it.toString())
                 }
             }.collect()
         }

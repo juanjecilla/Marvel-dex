@@ -8,10 +8,12 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 
+const val DEFAULT_ANIMATION_DURATION = 300L
+
 fun View.visible(visible: Boolean, animate: Boolean = true) {
     if (visible) {
         if (animate) {
-            animate().alpha(1f).setDuration(300).setListener(object : AnimatorListenerAdapter() {
+            animate().alpha(1f).setDuration(DEFAULT_ANIMATION_DURATION).setListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationStart(animation: Animator) {
                     super.onAnimationStart(animation)
                     visibility = View.VISIBLE

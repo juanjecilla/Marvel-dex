@@ -19,10 +19,9 @@ class DataEntityMapper {
         data.code, data.exception
     )
 
+    private fun mapCharacters(results: List<MarvelCharacterData>) = results.map { mapCharacter(it) }
 
-    fun mapCharacters(results: List<MarvelCharacterData>) = results.map { mapCharacter(it) }
-
-    fun mapCharacter(data: MarvelCharacterData) = MarvelCharacterEntity(
+    private fun mapCharacter(data: MarvelCharacterData) = MarvelCharacterEntity(
         thumbnail = mapThumbnail(data.thumbnail),
         urls = mapUrls(data.urls),
         stories = mapCollection(data.stories),
@@ -54,8 +53,6 @@ class DataEntityMapper {
         type = data.type,
         url = data.url,
     )
-
-    private fun mapCollections(data: List<CollectionData>) = data.map { mapCollection(it) }
 
     private fun mapCollection(data: CollectionData) = CollectionEntity(
         collectionURI = data.collectionURI,
